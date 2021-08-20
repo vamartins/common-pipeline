@@ -29,15 +29,11 @@ variables:
       --backend-config="unlock_method=DELETE"
       --backend-config="retry_wait_min=5"
 
-.validate_terraform_http:
-  extends: .tf_base
-  script:
-    - terraform validate
-
 .tf_plan:
   extends: .tf_base
   script:
     - echo "Going to execute terraform plan"
+    - terraform validate
     - terraform plan
     - terraform show
 
