@@ -9,17 +9,21 @@ variables:
     name: registry.gitlab.com/gitlab-org/terraform-images/stable:latest
     entrypoint: [""]
   variables:
-    TF_STATE: ${CI_PROJECT_NAME}-${ENVIRONMENT}
-    TF_ADDRESS: ${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/terraform/state/
+    TF_STATE: ${CI_PROJECT_NAME}-${CI_COMMIT_REF_NAME}
+    TF_ADDRESS: ${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/terraform/state
   before_script:
     - apk update
     - apk add git
+    - apk add bash npm -q
+    - apk add --no-cache python3 py3-pip
     - terraform --version
+    - ls -l
     - cd $TERRAFORM_DIRECTORY_NAME/$CODE_PATH
     - ls -l
     - echo "Base state address for this repository ${TF_ADDRESS}"
     - echo "Using ${TF_STATE} as the specific statekey"
     - echo "Full state path ${TF_ADDRESS}/${TF_STATE}"
+
     - terraform init
       --backend-config="address=${TF_ADDRESS}/${TF_STATE}"
       --backend-config="lock_address=${TF_ADDRESS}/${TF_STATE}/lock"
