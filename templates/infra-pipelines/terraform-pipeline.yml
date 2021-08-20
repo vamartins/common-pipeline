@@ -9,7 +9,7 @@ variables:
     name: registry.gitlab.com/gitlab-org/terraform-images/stable:latest
     entrypoint: [""]
   variables:
-    TF_STATE: ${CI_PROJECT_NAME}-${TF_VAR_AWS_ACCOUNT_ID}-${ENVIRONMENT}
+    TF_STATE: ${CI_PROJECT_NAME}-${ENVIRONMENT}
     TF_ADDRESS: ${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/terraform/state/${CI_PROJECT_NAME}-${ENVIRONMENT}
   before_script:
     - apk update
