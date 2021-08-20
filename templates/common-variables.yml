@@ -19,7 +19,7 @@ variables:
   #common variables
   TF_VAR_AWS_DEPLOYMENT_ROLE: customer-account-deployment-policy
   #dev variables
-  TF_VAR_ENVIRONMENT: dev
+  ENVIRONMENT: dev
   TF_VAR_AWS_ACCOUNT_ID: 836492233926
   #tools versions
-  TF_VAR_TERRAFORM_VERSION: 1.0.5
+  TERRAFORM_VERSION: 1.0.5
