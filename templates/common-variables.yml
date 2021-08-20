@@ -10,6 +10,7 @@ variables:
   TF_VAR_application_name: ${CI_PROJECT_NAME}
   TF_VAR_logs_path: /logs
   TF_VAR_ci_username: vagner.samm
+  TF_VAR_ci_token: ${CI_JOB_TOKEN}
   TF_VAR_clean_infra_state_address: https://gitlab.com/api/v4/projects/11979/terraform/state/clean-infra-dev
   #terraform tags
   TF_VAR_technical_owner: vagner.samm@gmail.com
