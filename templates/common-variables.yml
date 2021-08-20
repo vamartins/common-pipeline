@@ -1,0 +1,30 @@
+variables:
+  #terraform variables
+  TF_VAR_aws_region: eu-central-1
+  TF_VAR_aws_deployment_role: deployment_role_todo
+  TF_VAR_application_name: ${CI_PROJECT_NAME}
+  TF_VAR_logs_path: /logs
+  TF_VAR_ci_username: gitlab-ci-token
+  TF_VAR_ci_token: ${CI_JOB_TOKEN}
+  TF_VAR_clean_infra_state_address: https://gitlab.com/api/v4/projects/11979/terraform/state/clean-infra-dev
+  #terraform tags
+  TF_VAR_technical_owner: claudia.donia@tui.co.uk
+  TF_VAR_tier: Web layer
+  TF_VAR_business_unit: Customer
+  TF_VAR_classification: private
+  #common variables
+  DEPLOYMENT_POLICY_NAME: customer-account-deployment-policy
+  #dev variables
+  DEV_ENVIRONMENT_NAME: dev
+  DEV_AWS_ACCOUNT_NUMBER: 836492233926
+  #test variables
+  TEST_ENVIRONMENT_NAME: test
+  TEST_AWS_ACCOUNT_NUMBER: 671545938085
+  #dev variables
+  PREPROD_ENVIRONMENT_NAME: preprod
+  PREPROD_AWS_ACCOUNT_NUMBER: 703969042641
+  #dev variables
+  PROD_ENVIRONMENT_NAME: prod
+  PROD_AWS_ACCOUNT_NUMBER: 836492233926
+  #tools versions
+  TERRAFORM_VERSION: 1.0.3
