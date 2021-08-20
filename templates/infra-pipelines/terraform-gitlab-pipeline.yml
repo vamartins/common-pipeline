@@ -1,10 +1,9 @@
 .tf_base:
   image:
-    name: registry.gitlab.com/gitlab-org/terraform-images/releases/terraform:${TERRAFORM_VERSION}
+    name: registry.gitlab.com/gitlab-org/terraform-images/stable:latest
   before_script:
     - export TF_ADDRESS=${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/terraform/state/${CI_PROJECT_NAME}-${ENVIRONMENT}
     - cd infra
-    - gitlab-terraform fmt -check
     - gitlab-terraform init
     - gitlab-terraform validate
 
