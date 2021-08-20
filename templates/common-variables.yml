@@ -12,14 +12,14 @@ variables:
   TF_VAR_ci_username: vagner.samm
   TF_VAR_ci_token: ${CI_JOB_TOKEN}
   TF_VAR_clean_infra_state_address: https://gitlab.com/api/v4/projects/11979/terraform/state/clean-infra-dev
-  #terraform tags
-  TF_VAR_technical_owner: vagner.samm@gmail.com
-  TF_VAR_tier: Web layer
-  TF_VAR_business_unit: Personal Training
-  TF_VAR_classification: private
-  #common variables
-  TF_VAR_AWS_DEPLOYMENT_ROLE: customer-account-deployment-policy
-  #dev variables
-  ENVIRONMENT: dev
-  #tools versions
-  TERRAFORM_VERSION: 1.0.5
+  # #terraform tags
+  # TF_VAR_technical_owner: vagner.samm@gmail.com
+  # TF_VAR_tier: Web layer
+  # TF_VAR_business_unit: Personal Training
+  # TF_VAR_classification: private
+  # #common variables
+  # TF_VAR_AWS_DEPLOYMENT_ROLE: customer-account-deployment-policy
+  # #dev variables
+  # ENVIRONMENT: dev
+  # #tools versions
+  # TERRAFORM_VERSION: 1.0.5

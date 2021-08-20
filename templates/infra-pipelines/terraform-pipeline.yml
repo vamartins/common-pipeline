@@ -12,10 +12,6 @@ variables:
     TF_STATE: ${CI_PROJECT_NAME}-${CI_COMMIT_REF_NAME}
     TF_ADDRESS: ${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/terraform/state
   before_script:
-    # - apk update
-    # - apk add git
-    # - apk add bash npm -q
-    # - apk add --no-cache python3 py3-pip
     - terraform --version
     - cd $TERRAFORM_DIRECTORY_NAME/$CODE_PATH
     - ls -l
