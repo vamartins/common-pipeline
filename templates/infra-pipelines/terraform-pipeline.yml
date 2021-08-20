@@ -10,12 +10,13 @@ variables:
     entrypoint: [""]
   variables:
     TF_STATE: ${CI_PROJECT_NAME}-${TF_VAR_AWS_ACCOUNT_ID}
-    TF_ADDRESS: ${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/terraform/state
+    TF_ADDRESS: ${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/terraform/state/${CI_PROJECT_NAME}-${ENVIRONMENT}
   before_script:
     - apk update
     - apk add git
     - terraform --version
     - cd $TERRAFORM_DIRECTORY_NAME/$CODE_PATH
+    - ls -l
     - echo "Base state address for this repository ${TF_ADDRESS}"
     - echo "Using ${TF_STATE} as the specific statekey"
     - echo "Full state path ${TF_ADDRESS}/${TF_STATE}"
@@ -46,4 +47,3 @@ variables:
   extends: .tf_base
   script:
     - terraform destroy -auto-approve -no-color
-
