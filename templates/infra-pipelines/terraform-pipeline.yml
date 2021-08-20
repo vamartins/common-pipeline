@@ -7,7 +7,7 @@ variables:
 .tf_base:
   image:
     name: registry.gitlab.com/gitlab-org/terraform-images/stable:latest
-    entrypoint: [""]
+   # entrypoint: [""]
   variables:
     TF_STATE: ${CI_PROJECT_NAME}-${CI_COMMIT_REF_NAME}
     TF_ADDRESS: ${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/terraform/state
