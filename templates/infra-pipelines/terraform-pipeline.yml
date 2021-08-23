@@ -1,13 +1,12 @@
-variables:
-  TERRAFORM_DIRECTORY_NAME: "infra"
-  TERRAFORM_DIRECTORY_NAME_VARIABLES: "envs"
-  REPLACE_PATTERN: "#pipeline:replace:"
-  CODE_PATH: ""
+# variables:
+#   TERRAFORM_DIRECTORY_NAME: "infra"
+#   TERRAFORM_DIRECTORY_NAME_VARIABLES: "envs"
+#   REPLACE_PATTERN: "#pipeline:replace:"
+#   CODE_PATH: ""
 
 .tf_base:
   image:
     name: registry.gitlab.com/gitlab-org/terraform-images/stable:latest
-   # entrypoint: [""]
   variables:
     TF_STATE: ${CI_PROJECT_NAME}-${CI_COMMIT_REF_NAME}
     TF_ADDRESS: ${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/terraform/state
