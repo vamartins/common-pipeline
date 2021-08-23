@@ -8,7 +8,7 @@ variables:
   image:
     name: registry.gitlab.com/gitlab-org/terraform-images/stable:latest
   variables:
-    TF_STATE: ${CI_PROJECT_NAME}-${CI_COMMIT_REF_NAME}
+    TF_STATE: ${CI_PROJECT_NAME}-${environment}
     TF_ADDRESS: ${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/terraform/state
   before_script:
     - terraform --version
