@@ -7,4 +7,4 @@ variables:
   TF_VAR_subnet_public_cidr: 172.16.1.0/24
   TF_VAR_kp_aws_user: awslab
   TF_VAR_kp_awslab_file_name: awslab_personal
-  # TF_VAR_application_name: ${CI_PROJECT_NAME}
+  TF_VAR_application_name: ${CI_PROJECT_NAME}
