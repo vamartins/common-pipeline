@@ -1,6 +1,6 @@
-# variables:
-#   TERRAFORM_DIRECTORY_NAME: "infra"
-#   TERRAFORM_DIRECTORY_NAME_VARIABLES: "envs"
+variables:
+  TERRAFORM_DIRECTORY_NAME: "infra"
+  TERRAFORM_DIRECTORY_NAME_VARIABLES: "envs"
 #   REPLACE_PATTERN: "#pipeline:replace:"
 #   CODE_PATH: ""
 
