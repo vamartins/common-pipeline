@@ -11,5 +11,3 @@ variables:
 
   TF_VAR_application_name: ${CI_PROJECT_NAME}
   TF_VAR_project_code: cicd
-  TF_VAR_ENVIRONMENT_DEV: dev
-  TF_VAR_ENVIRONMENT_TEST: test
