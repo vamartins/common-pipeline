@@ -45,3 +45,9 @@ variables:
   extends: .tf_base
   script:
     - terraform destroy -auto-approve -no-color
+
+.promote_tf:
+  extends: .tf_base
+  script:
+    - terraform plan -out=plan.file
+    - terraform apply plan.file
