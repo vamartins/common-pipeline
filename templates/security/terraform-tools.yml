@@ -1,11 +1,13 @@
 .tfsec:
   image:
     name: tfsec/tfsec-ci:latest
+    entrypoint: [""]
   before_script:
     - ""
   script:
     - terraform init
-    - tfsec infra --format junit --out tfsec
+    - cd infra
+    - tfsec . --format junit --out tfsec
   artifacts:
     name: Terraform tfsec analysis
     expire_in: 1 week
