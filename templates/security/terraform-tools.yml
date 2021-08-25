@@ -1,6 +1,6 @@
 .tfsec:
   image:
-    name: tfsec/tfsec-ci:latest
+    name: aquasec/tfsec:latest
     entrypoint: [""]
   before_script:
     - ""
