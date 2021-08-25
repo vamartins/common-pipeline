@@ -4,6 +4,7 @@
   before_script:
     - ""
   script:
+    - terraform init
     - tfsec infra --format junit --out tfsec
   artifacts:
     name: Terraform tfsec analysis
