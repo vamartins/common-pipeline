@@ -5,8 +5,7 @@
   before_script:
     - ""
   script:
-    - cd infra
-    - tfsec . --format junit --out tfsec
+    - tfsec infra --format junit --out tfsec
   artifacts:
     name: Terraform tfsec analysis
     expire_in: 1 week
