@@ -1,52 +1,104 @@
-.tfsec:
-  image:
-    name: aquasec/tfsec:latest
-    entrypoint: [""]
-  before_script:
-    - ""
-  script:
-    - tfsec infra --format junit --out tfsec
-  artifacts:
-    name: Terraform tfsec analysis
-    expire_in: 1 week
-    when: always
-    paths:
-      - tfsec
-    reports:
-      junit: tfsec
+include:
+  - project: vagner.samm/common-pipeline
+    ref: main
+    file:
+      - templates/common-variables.yml
+      - templates/infra-pipelines/terraform-pipeline.yml
+      - templates/security/terraform-tools.yml
 
-.checkov:
-  image:
-    name: bridgecrew/checkov:latest
-    entrypoint: [""]
-  before_script:
-    - ""
-  script:
-    - checkov -o junitxml -d . | tee checkov
-  artifacts:
-    name: Terraform checkov analysis
-    expire_in: 1 week
-    when: always
-    paths:
-      - checkov
-    reports:
-      junit: checkov
+variables:
+  TF_ROOT: $CI_PROJECT_DIR/infra/
+  TF_VAR_application_name: $CI_PROJECT_NAME
+  TF_VAR_aws_region: $AWS_REGION
 
-.tflint:
-  image:
-    name: ghcr.io/terraform-linters/tflint-bundle:latest
-    entrypoint: [""]
-  before_script:
-    - ""
-  script:
-    - cd infra
-    - tflint --init
-    - tflint -f junit | tee tflint
-  artifacts:
-    name: Terraform tflint analysis
-    expire_in: 1 week
-    when: always
-    paths:
-      - infra/tflint
-    reports:
-      junit: infra/tflint
+.dev_variables: &dev_variables
+  AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID_DEV
+  AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY_DEV
+  TF_VAR_environment: dev
+  TF_VAR_aws_account_number: $AWS_ACCOUNT_ID_DEV
+
+.test_variables: &test_variables
+  AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID_TEST
+  AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY_TEST
+  TF_VAR_environment: test
+  TF_VAR_aws_account_number: $AWS_ACCOUNT_ID_TEST
+
+stages:
+  - validation
+  - dev
+  - test
+  - destroy
+
+# tfsec:
+#   extends: .tfsec
+#   stage: test
+#   only:
+#     - merge_requests
+
+# checkov:
+#   extends: .checkov
+#   stage: test
+#   only:
+#     - merge_requests
+
+tflint:
+  extends: .tflint
+  stage: validation
+  rules:
+    - if: $CI_COMMIT_BRANCH == "main"
+
+tf_plan_dev:
+  extends: .tf_plan
+  variables:
+    <<: *dev_variables
+  stage: dev
+  environment:
+    name: develop
+  rules:
+    - if: $CI_COMMIT_BRANCH == "main"
+
+tf_deploy_dev:
+  extends: .tf_deploy
+  variables:
+    <<: *dev_variables
+  stage: dev
+  environment:
+    name: develop
+  rules:
+    - if: $CI_COMMIT_BRANCH == "main"
+      when: manual
+
+promote_test:
+  extends: .promote_tf
+  variables:
+    <<: *test_variables
+  stage: test
+  environment:
+    name: testing
+  rules:
+    - if: $CI_COMMIT_BRANCH == "main"
+      when: manual
+
+tf_destroy_dev:
+  extends: .tf_destroy
+  variables:
+    <<: *dev_variables
+  stage: destroy
+  environment:
+    name: develop
+  rules:
+    - if: $CI_COMMIT_BRANCH == "main"
+      when: manual
+    - when: never
+
+tf_destroy_test:
+  extends: .tf_destroy
+  variables:
+    <<: *test_variables
+  stage: destroy
+  environment:
+    name: testing
+  rules:
+    - if: $CI_COMMIT_BRANCH == "main"
+      when: manual
+    - when: never

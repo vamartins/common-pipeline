@@ -39,7 +39,7 @@ variables:
 .tf_deploy:
   extends: .tf_base
   script:
-    - terraform apply
+    - terraform apply -auto-approve
 
 .promote_tf:
   extends: .tf_base
