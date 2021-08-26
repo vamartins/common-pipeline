@@ -39,13 +39,13 @@ variables:
 .tf_deploy:
   extends: .tf_base
   script:
-    - terraform apply plan.file -auto-approve
+    - terraform apply plan.file
 
 .promote_tf:
   extends: .tf_base
   script:
     - terraform plan -out=plan.file
-    - terraform apply plan.file -auto-approve
+    - terraform apply plan.file
   
 .tf_destroy:
   extends: .tf_base
