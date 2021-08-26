@@ -33,13 +33,13 @@ variables:
   script:
     - echo "Going to execute terraform plan"
     - terraform validate
-    - terraform plan -out=plan.file
+    - terraform plan
     - terraform show
 
 .tf_deploy:
   extends: .tf_base
   script:
-    - terraform apply plan.file
+    - terraform apply
 
 .promote_tf:
   extends: .tf_base
