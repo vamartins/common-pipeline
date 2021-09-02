@@ -9,4 +9,4 @@ variables:
 
   TF_VAR_application_name: ${CI_PROJECT_NAME}
   TF_VAR_environment: ${CI_ENVIRONMENT_NAME}
-  TF_VAR_project_code: cicd
+  TF_VAR_project_code: awslab
